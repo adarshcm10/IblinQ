@@ -47,24 +47,32 @@ class _ValueSelectorState extends State<ValueSelector> {
         IconButton(
           icon: const Icon(Icons.remove, color: Colors.white),
           onPressed: _decrementValue,
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
         ),
         Container(
-          width: 50,
+          width: 70,
           height: 50,
           //border colour white and radius 10
           decoration: BoxDecoration(
             border: Border.all(color: Colors.white, width: 2),
             borderRadius: BorderRadius.circular(5),
           ),
-          child: Center(
-            child: Text(
-              _value.toString(),
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white, fontSize: 25),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 5),
+            child: Center(
+              child: Text(
+                _value.toString(),
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    color: Colors.white, fontSize: 25, fontFamily: 'digital'),
+              ),
             ),
           ),
         ),
         IconButton(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
           icon: const Icon(Icons.add, color: Colors.white),
           onPressed: _incrementValue,
         ),

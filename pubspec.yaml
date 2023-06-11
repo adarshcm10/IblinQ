@@ -81,7 +81,9 @@ flutter:
      - family: Medio
        fonts:
          - asset: fonts/medio.otf
-  #       - asset: fonts/Schyler-Italic.ttf
+     - family: digital
+       fonts:
+         - asset: fonts/digital.ttf
   #       - style: regular
   #   - family: Trajan Pro
   #     fonts:

@@ -13,7 +13,7 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
-  int selectedButtonIndex = -1;
+  int selectedButtonIndex = 2;
   var img;
 
   void selectButton(int index) {
@@ -49,16 +49,15 @@ class _homeState extends State<home> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          //divider of white color
-          // Padding(
-          //   padding: const EdgeInsets.only(bottom: 60),
-          //   child: const Divider(
-          //     color: Color.fromARGB(255, 137, 137, 137),
-          //     thickness: 2,
-          //     indent: 100,
-          //     endIndent: 100,
-          //   ),
-          // ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: Text(
+              'Select Icon',
+              style: TextStyle(
+                  color: Color(0xffffffff), fontSize: 20, fontFamily: 'medio'),
+              textAlign: TextAlign.center,
+            ),
+          ),
           SizedBox(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
