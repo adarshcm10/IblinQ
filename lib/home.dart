@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'buttons.dart';
+
 class home extends StatefulWidget {
   const home({super.key});
 
@@ -10,6 +12,15 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+  int selectedButtonIndex = -1;
+  var img;
+
+  void selectButton(int index) {
+    setState(() {
+      selectedButtonIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,46 +47,43 @@ class _homeState extends State<home> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: const Color(0xffffffff),
-              //borderRadius: BorderRadius.circular(10),
-            ),
+          SizedBox(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                //add image 1.gif
-                Padding(
-                  padding: EdgeInsets.only(top: 0, right: 0, left: 0),
-                  child: Image(
-                    image: AssetImage('assets/1.gif'),
-                    height: 80,
-                  ),
+                SelectableImageButton(
+                    imagePath: 'assets/2.gif',
+                    isSelected: selectedButtonIndex == 0,
+                    onPressed: () {
+                      selectButton(0);
+                      img = 'assets/2.gif';
+                    }),
+                SelectableImageButton(
+                    imagePath: 'assets/3.gif',
+                    isSelected: selectedButtonIndex == 1,
+                    onPressed: () {
+                      selectButton(1);
+                      img = 'assets/3.gif';
+                    }),
+                SelectableImageButton(
+                  imagePath: 'assets/4.gif',
+                  isSelected: selectedButtonIndex == 2,
+                  onPressed: () {
+                    selectButton(2);
+                    img = 'assets/4.gif';
+                  },
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 0, right: 0, left: 0),
-                  child: Image(
-                    image: AssetImage('assets/2.gif'),
-                    height: 80,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 0, right: 0, left: 0),
-                  child: Image(
-                    image: AssetImage('assets/1.gif'),
-                    height: 80,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 0),
-                  child: Image(
-                    image: AssetImage('assets/1.gif'),
-                    height: 80,
-                  ),
+                SelectableImageButton(
+                  imagePath: 'assets/5.gif',
+                  isSelected: selectedButtonIndex == 3,
+                  onPressed: () {
+                    selectButton(3);
+                    img = 'assets/5.gif';
+                  },
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
