@@ -22,94 +22,148 @@ class _homeState extends State<home> {
     });
   }
 
+  String _imagePath = 'assets/round1.gif';
+  void _changeImage() {
+    setState(() {
+      _imagePath = _imagePath == 'assets/round1.gif'
+          ? 'assets/round2.gif'
+          : 'assets/round1.gif';
+    });
+    _changetxtImg();
+  }
+
+  String _txtImg = 'assets/start.png';
+  void _changetxtImg() {
+    setState(() {
+      _txtImg = _txtImg == 'assets/start.png'
+          ? 'assets/stop.png'
+          : 'assets/start.png';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xff020202),
-      appBar: AppBar(
-        //increase appbar height
-        toolbarHeight: 100,
-        //background color 020202
-        backgroundColor: const Color(0xff020202),
-        //center title IblinQ
-        centerTitle: true,
-        //title IblinQ
-        title: const Padding(
-          padding: EdgeInsets.only(top: 40),
-          child: Text(
-            'IblinQ',
-            style: TextStyle(
-                color: Color(0xffffffff),
-                fontSize: 40,
-                fontFamily: 'Moirai One'),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 150),
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  bottom: 65,
+                ),
+                child: Image.asset('assets/logo.png', width: 200),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Text(
+                  'Select Icon',
+                  style: TextStyle(
+                      color: Color(0xffffffff),
+                      fontSize: 20,
+                      fontFamily: 'medio'),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SelectableImageButton(
+                        imagePath: 'assets/2.gif',
+                        isSelected: selectedButtonIndex == 0,
+                        onPressed: () {
+                          selectButton(0);
+                          img = 'assets/2.gif';
+                        }),
+                    SelectableImageButton(
+                        imagePath: 'assets/3.gif',
+                        isSelected: selectedButtonIndex == 1,
+                        onPressed: () {
+                          selectButton(1);
+                          img = 'assets/3.gif';
+                        }),
+                    SelectableImageButton(
+                      imagePath: 'assets/4.gif',
+                      isSelected: selectedButtonIndex == 2,
+                      onPressed: () {
+                        selectButton(2);
+                        img = 'assets/4.gif';
+                      },
+                    ),
+                    SelectableImageButton(
+                      imagePath: 'assets/5.gif',
+                      isSelected: selectedButtonIndex == 3,
+                      onPressed: () {
+                        selectButton(3);
+                        img = 'assets/5.gif';
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              //text 'Select interval of notification (in seconds 15 to 120)'
+              Padding(
+                padding: const EdgeInsets.only(top: 40),
+                child: Text(
+                  'Select interval of notification \n(in seconds 15 to 120)',
+                  style: TextStyle(
+                      color: Color(0xffffffff),
+                      fontSize: 20,
+                      fontFamily: 'medio'),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: ValueSelector(),
+              ),
+
+              Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 90),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: _changeImage,
+                          child: Image.asset(
+                            _imagePath,
+                            width: 100,
+                            height: 100,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  //add image start
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 60, right: 40, top: 20),
+                    child: Row(
+                      //arrage elements to start
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image.asset(
+                          _txtImg,
+                          width: 100,
+                        ),
+                      ],
+                    ),
+                  ),
+                  //add image round1
+                ],
+              ),
+            ],
           ),
         ),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: Text(
-              'Select Icon',
-              style: TextStyle(
-                  color: Color(0xffffffff), fontSize: 20, fontFamily: 'medio'),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          SizedBox(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SelectableImageButton(
-                    imagePath: 'assets/2.gif',
-                    isSelected: selectedButtonIndex == 0,
-                    onPressed: () {
-                      selectButton(0);
-                      img = 'assets/2.gif';
-                    }),
-                SelectableImageButton(
-                    imagePath: 'assets/3.gif',
-                    isSelected: selectedButtonIndex == 1,
-                    onPressed: () {
-                      selectButton(1);
-                      img = 'assets/3.gif';
-                    }),
-                SelectableImageButton(
-                  imagePath: 'assets/4.gif',
-                  isSelected: selectedButtonIndex == 2,
-                  onPressed: () {
-                    selectButton(2);
-                    img = 'assets/4.gif';
-                  },
-                ),
-                SelectableImageButton(
-                  imagePath: 'assets/5.gif',
-                  isSelected: selectedButtonIndex == 3,
-                  onPressed: () {
-                    selectButton(3);
-                    img = 'assets/5.gif';
-                  },
-                ),
-              ],
-            ),
-          ),
-          //text 'Select interval of notification (in seconds 15 to 120)'
-          Padding(
-            padding: const EdgeInsets.only(top: 40),
-            child: Text(
-              'Select interval of notification \n(in seconds 15 to 120)',
-              style: TextStyle(
-                  color: Color(0xffffffff), fontSize: 20, fontFamily: 'medio'),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: ValueSelector(),
-          ),
-        ],
       ),
     );
   }

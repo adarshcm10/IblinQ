@@ -8,10 +8,14 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      //add theme data
+      theme: ThemeData(
+        primaryColor: Color(0xff020202),
+        scaffoldBackgroundColor: Color(0xff020202),
+      ),
       debugShowCheckedModeBanner: false,
       title: 'IblinQ',
       home: MyHomePage(),
