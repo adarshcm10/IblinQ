@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:IblinQ/valueselector.dart';
 import 'package:flutter/material.dart';
 
 import 'buttons.dart';
@@ -46,7 +47,18 @@ class _homeState extends State<home> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          //divider of white color
+          // Padding(
+          //   padding: const EdgeInsets.only(bottom: 60),
+          //   child: const Divider(
+          //     color: Color.fromARGB(255, 137, 137, 137),
+          //     thickness: 2,
+          //     indent: 100,
+          //     endIndent: 100,
+          //   ),
+          // ),
           SizedBox(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -83,6 +95,20 @@ class _homeState extends State<home> {
                 ),
               ],
             ),
+          ),
+          //text 'Select interval of notification (in seconds 15 to 120)'
+          Padding(
+            padding: const EdgeInsets.only(top: 40),
+            child: Text(
+              'Select interval of notification \n(in seconds 15 to 120)',
+              style: TextStyle(
+                  color: Color(0xffffffff), fontSize: 20, fontFamily: 'medio'),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: ValueSelector(),
           ),
         ],
       ),
