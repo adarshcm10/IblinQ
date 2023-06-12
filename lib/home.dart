@@ -136,8 +136,8 @@ class _homeState extends State<home> {
                           onTap: _changeImage,
                           child: Image.asset(
                             _imagePath,
-                            width: 100,
-                            height: 100,
+                            width: 150,
+                            height: 150,
                           ),
                         ),
                       ],
