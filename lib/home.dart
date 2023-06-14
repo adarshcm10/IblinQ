@@ -1,7 +1,10 @@
-// ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables
+
+import 'dart:async';
 
 import 'package:IblinQ/valueselector.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_overlay_window/flutter_overlay_window.dart';
 
 import 'buttons.dart';
 
@@ -22,8 +25,28 @@ class _homeState extends State<home> {
     });
   }
 
+  late Timer overlayTimer;
+
+  void startOverlayTimer() {
+    overlayTimer = Timer.periodic(Duration(seconds: 10), (timer) async {
+      await FlutterOverlayWindow.showOverlay(height: 200, width: 200);
+
+      Future.delayed(Duration(seconds: 3), () async {
+        await FlutterOverlayWindow.closeOverlay();
+      });
+    });
+  }
+
+  bool _isButtonDisabled = false;
   String _imagePath = 'assets/round1.gif';
-  void _changeImage() {
+  Future<void> _changeImage() async {
+    if (_isButtonDisabled) {
+      _isButtonDisabled = false;
+      overlayTimer.cancel();
+    } else {
+      _isButtonDisabled = true;
+    }
+    startOverlayTimer();
     setState(() {
       _imagePath = _imagePath == 'assets/round1.gif'
           ? 'assets/round2.gif'
@@ -48,7 +71,7 @@ class _homeState extends State<home> {
       backgroundColor: const Color(0xff020202),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 150),
+          padding: const EdgeInsets.only(top: 110),
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -132,6 +155,8 @@ class _homeState extends State<home> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        //elavated button with clid image _imagePath and onpressed _changeImage
+
                         GestureDetector(
                           onTap: _changeImage,
                           child: Image.asset(
