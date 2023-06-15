@@ -37,15 +37,8 @@ class _homeState extends State<home> {
     });
   }
 
-  bool _isButtonDisabled = false;
   String _imagePath = 'assets/round1.gif';
   Future<void> _changeImage() async {
-    if (_isButtonDisabled) {
-      _isButtonDisabled = false;
-      overlayTimer.cancel();
-    } else {
-      _isButtonDisabled = true;
-    }
     startOverlayTimer();
     setState(() {
       _imagePath = _imagePath == 'assets/round1.gif'
@@ -80,7 +73,17 @@ class _homeState extends State<home> {
                 padding: EdgeInsets.only(
                   bottom: 65,
                 ),
-                child: Image.asset('assets/logo.png', width: 200),
+                child:
+                    //wrap inside a gesture detector : Image.asset('assets/logo.png', width: 200),
+                    GestureDetector(
+                  onTap: () {
+                    overlayTimer.cancel();
+                  },
+                  child: Image.asset(
+                    'assets/logo.png',
+                    width: 200,
+                  ),
+                ),
               ),
 
               Padding(
