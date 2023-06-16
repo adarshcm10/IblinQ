@@ -80,3 +80,7 @@ class _ValueSelectorState extends State<ValueSelector> {
     );
   }
 }
+
+int getInterval() {
+  return _ValueSelectorState()._value;
+}

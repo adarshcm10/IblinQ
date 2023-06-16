@@ -28,7 +28,8 @@ class _homeState extends State<home> {
   late Timer overlayTimer;
 
   void startOverlayTimer() {
-    overlayTimer = Timer.periodic(Duration(seconds: 10), (timer) async {
+    int duration = getInterval();
+    overlayTimer = Timer.periodic(Duration(seconds: duration), (timer) async {
       await FlutterOverlayWindow.showOverlay(height: 200, width: 200);
 
       Future.delayed(Duration(seconds: 3), () async {
@@ -37,13 +38,20 @@ class _homeState extends State<home> {
     });
   }
 
+  bool active = false;
   String _imagePath = 'assets/round1.gif';
   Future<void> _changeImage() async {
-    startOverlayTimer();
     setState(() {
       _imagePath = _imagePath == 'assets/round1.gif'
           ? 'assets/round2.gif'
           : 'assets/round1.gif';
+      if (active) {
+        overlayTimer.cancel();
+        //FlutterOverlayWindow.closeOverlay();
+      } else {
+        startOverlayTimer();
+        active = true;
+      }
     });
     _changetxtImg();
   }
@@ -73,16 +81,9 @@ class _homeState extends State<home> {
                 padding: EdgeInsets.only(
                   bottom: 65,
                 ),
-                child:
-                    //wrap inside a gesture detector : Image.asset('assets/logo.png', width: 200),
-                    GestureDetector(
-                  onTap: () {
-                    overlayTimer.cancel();
-                  },
-                  child: Image.asset(
-                    'assets/logo.png',
-                    width: 200,
-                  ),
+                child: Image.asset(
+                  'assets/logo.png',
+                  width: 200,
                 ),
               ),
 
@@ -195,4 +196,8 @@ class _homeState extends State<home> {
       ),
     );
   }
+}
+
+int getIndex() {
+  return _homeState().selectedButtonIndex;
 }
