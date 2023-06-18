@@ -2,7 +2,7 @@ import 'package:IblinQ/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_window/flutter_overlay_window.dart';
 
-import 'home.dart';
+import 'var.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,7 +42,7 @@ class imagepath extends StatefulWidget {
 }
 
 class _imagepathState extends State<imagepath> {
-  int indx = getIndex();
+  int indx = ShareData.Indx;
   String imgsel() {
     if (indx == 0) {
       return 'assets/2.gif';

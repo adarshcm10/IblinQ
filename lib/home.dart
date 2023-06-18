@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_overlay_window/flutter_overlay_window.dart';
 
 import 'buttons.dart';
+import 'var.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -16,19 +17,16 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
-  int selectedButtonIndex = 2;
-  var img;
-
   void selectButton(int index) {
     setState(() {
-      selectedButtonIndex = index;
+      ShareData.Indx = index;
     });
   }
 
   late Timer overlayTimer;
 
   void startOverlayTimer() {
-    int duration = getInterval();
+    int duration = ShareData.value;
     overlayTimer = Timer.periodic(Duration(seconds: duration), (timer) async {
       await FlutterOverlayWindow.showOverlay(height: 200, width: 200);
 
@@ -50,9 +48,9 @@ class _homeState extends State<home> {
         //FlutterOverlayWindow.closeOverlay();
       } else {
         startOverlayTimer();
-        active = true;
       }
     });
+    active = !active;
     _changetxtImg();
   }
 
@@ -104,32 +102,32 @@ class _homeState extends State<home> {
                   children: [
                     SelectableImageButton(
                         imagePath: 'assets/2.gif',
-                        isSelected: selectedButtonIndex == 0,
+                        isSelected: ShareData.Indx == 0,
                         onPressed: () {
                           selectButton(0);
-                          img = 'assets/2.gif';
+                          ShareData.Img = 'assets/2.gif';
                         }),
                     SelectableImageButton(
                         imagePath: 'assets/3.gif',
-                        isSelected: selectedButtonIndex == 1,
+                        isSelected: ShareData.Indx == 1,
                         onPressed: () {
                           selectButton(1);
-                          img = 'assets/3.gif';
+                          ShareData.Img = 'assets/3.gif';
                         }),
                     SelectableImageButton(
                       imagePath: 'assets/4.gif',
-                      isSelected: selectedButtonIndex == 2,
+                      isSelected: ShareData.Indx == 2,
                       onPressed: () {
                         selectButton(2);
-                        img = 'assets/4.gif';
+                        ShareData.Img = 'assets/4.gif';
                       },
                     ),
                     SelectableImageButton(
                       imagePath: 'assets/5.gif',
-                      isSelected: selectedButtonIndex == 3,
+                      isSelected: ShareData.Indx == 3,
                       onPressed: () {
                         selectButton(3);
-                        img = 'assets/5.gif';
+                        ShareData.Img = 'assets/5.gif';
                       },
                     ),
                   ],
@@ -196,8 +194,4 @@ class _homeState extends State<home> {
       ),
     );
   }
-}
-
-int getIndex() {
-  return _homeState().selectedButtonIndex;
 }

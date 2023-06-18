@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'var.dart';
+
 class ValueSelector extends StatefulWidget {
   const ValueSelector({super.key});
 
@@ -11,25 +13,25 @@ class ValueSelector extends StatefulWidget {
 
 class _ValueSelectorState extends State<ValueSelector> {
   final TextEditingController _textEditingController = TextEditingController();
-  int _value = 15;
+  //int _value = 15;
 
   @override
   void initState() {
     super.initState();
-    _textEditingController.text = _value.toString();
+    _textEditingController.text = ShareData.value.toString();
   }
 
   void _incrementValue() {
     setState(() {
-      _value = (_value + 5).clamp(15, 120);
-      _textEditingController.text = _value.toString();
+      ShareData.value = (ShareData.value + 5).clamp(15, 120);
+      _textEditingController.text = ShareData.value.toString();
     });
   }
 
   void _decrementValue() {
     setState(() {
-      _value = (_value - 5).clamp(15, 120);
-      _textEditingController.text = _value.toString();
+      ShareData.value = (ShareData.value - 5).clamp(15, 120);
+      _textEditingController.text = ShareData.value.toString();
     });
   }
 
@@ -62,7 +64,7 @@ class _ValueSelectorState extends State<ValueSelector> {
             padding: const EdgeInsets.only(bottom: 5),
             child: Center(
               child: Text(
-                _value.toString(),
+                ShareData.value.toString(),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                     color: Colors.white, fontSize: 25, fontFamily: 'digital'),
@@ -79,8 +81,4 @@ class _ValueSelectorState extends State<ValueSelector> {
       ],
     );
   }
-}
-
-int getInterval() {
-  return _ValueSelectorState()._value;
 }
