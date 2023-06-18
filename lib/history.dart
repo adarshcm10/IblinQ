@@ -52,6 +52,7 @@ class _HistoryState extends State<History> {
                 ),
               ),
             ),
+
             SingleChildScrollView(
               child: DataTable(
                 columns: const [

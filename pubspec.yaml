@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_overlay_window: ^0.4.3
   system_alert_window: ^1.2.1
+  intl: ^0.18.1
+  
   
 
 dev_dependencies:

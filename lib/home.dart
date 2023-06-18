@@ -7,6 +7,8 @@ import 'package:IblinQ/valueselector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_window/flutter_overlay_window.dart';
 
+import 'package:intl/intl.dart';
+
 import 'buttons.dart';
 import 'history.dart';
 import 'var.dart';
@@ -19,11 +21,14 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
-  void selectButton(int index) {
-    setState(() {
-      ShareData.Indx = index;
-    });
-  }
+  late final String jkl;
+
+  bool selbtn1 = false;
+  bool selbtn2 = false;
+  bool selbtn3 = false;
+  bool selbtn4 = true;
+
+  int sel = 1;
 
   late Timer overlayTimer;
   String dt = '';
@@ -32,7 +37,10 @@ class _homeState extends State<home> {
   void startOverlayTimer() {
     int duration = ShareData.value;
     overlayTimer = Timer.periodic(Duration(seconds: duration), (timer) async {
-      await FlutterOverlayWindow.showOverlay(height: 200, width: 200);
+      await FlutterOverlayWindow.showOverlay(
+        height: 200,
+        width: 200,
+      );
 
       Future.delayed(Duration(seconds: 3), () async {
         await FlutterOverlayWindow.closeOverlay();
@@ -50,14 +58,14 @@ class _homeState extends State<home> {
       if (active) {
         overlayTimer.cancel();
         DateTime currentDate = DateTime.now();
-        String formattedHour = '${currentDate.hour}:${currentDate.minute}';
+        String formattedHour = DateFormat.jm().format(currentDate);
         time2 = formattedHour;
         ShareData.history.add([dt, time1, time2]);
       } else {
         DateTime currentDate = DateTime.now();
         String formattedDate =
             '${currentDate.day}-${currentDate.month}-${currentDate.year}';
-        String formattedHour = '${currentDate.hour}:${currentDate.minute}';
+        String formattedHour = DateFormat.jm().format(currentDate);
         dt = formattedDate;
         time1 = formattedHour;
         startOverlayTimer();
@@ -70,6 +78,8 @@ class _homeState extends State<home> {
   String _txtImg = 'assets/start.png';
   void _changetxtImg() {
     setState(() {
+      // ShareData.Indx = sel;
+
       _txtImg = _txtImg == 'assets/start.png'
           ? 'assets/stop.png'
           : 'assets/start.png';
@@ -114,39 +124,55 @@ class _homeState extends State<home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SelectableImageButton(
-                        imagePath: 'assets/2.gif',
-                        isSelected: ShareData.Indx == 0,
+                        imagePath: 'assets/0.gif',
+                        isSelected: selbtn1,
                         onPressed: () {
-                          selectButton(0);
-                          ShareData.Img = 'assets/2.gif';
+                          setState(() {
+                            selbtn1 = true;
+                            selbtn2 = false;
+                            selbtn3 = false;
+                            selbtn4 = false;
+                          });
                         }),
                     SelectableImageButton(
-                        imagePath: 'assets/3.gif',
-                        isSelected: ShareData.Indx == 1,
+                        imagePath: 'assets/1.gif',
+                        isSelected: selbtn2,
                         onPressed: () {
-                          selectButton(1);
-                          ShareData.Img = 'assets/3.gif';
+                          setState(() {
+                            selbtn1 = false;
+                            selbtn2 = true;
+                            selbtn3 = false;
+                            selbtn4 = false;
+                          });
                         }),
                     SelectableImageButton(
-                      imagePath: 'assets/4.gif',
-                      isSelected: ShareData.Indx == 2,
+                      imagePath: 'assets/2.gif',
+                      isSelected: selbtn3,
                       onPressed: () {
-                        selectButton(2);
-                        ShareData.Img = 'assets/4.gif';
+                        setState(() {
+                          selbtn1 = false;
+                          selbtn2 = false;
+                          selbtn3 = true;
+                          selbtn4 = false;
+                        });
                       },
                     ),
                     SelectableImageButton(
-                      imagePath: 'assets/5.gif',
-                      isSelected: ShareData.Indx == 3,
+                      imagePath: 'assets/3.gif',
+                      isSelected: selbtn4,
                       onPressed: () {
-                        selectButton(3);
-                        ShareData.Img = 'assets/5.gif';
+                        setState(() {
+                          selbtn1 = false;
+                          selbtn2 = false;
+                          selbtn3 = false;
+                          selbtn4 = true;
+                        });
                       },
                     ),
                   ],
                 ),
               ),
-              //text 'Select interval of notification (in seconds 15 to 120)'
+
               Padding(
                 padding: const EdgeInsets.only(top: 40),
                 child: Text(
