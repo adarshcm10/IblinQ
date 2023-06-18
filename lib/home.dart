@@ -2,11 +2,13 @@
 
 import 'dart:async';
 
+import 'package:IblinQ/transitions.dart';
 import 'package:IblinQ/valueselector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_window/flutter_overlay_window.dart';
 
 import 'buttons.dart';
+import 'history.dart';
 import 'var.dart';
 
 class home extends StatefulWidget {
@@ -24,7 +26,9 @@ class _homeState extends State<home> {
   }
 
   late Timer overlayTimer;
-
+  String dt = '';
+  String time1 = '';
+  String time2 = '';
   void startOverlayTimer() {
     int duration = ShareData.value;
     overlayTimer = Timer.periodic(Duration(seconds: duration), (timer) async {
@@ -45,8 +49,17 @@ class _homeState extends State<home> {
           : 'assets/round1.gif';
       if (active) {
         overlayTimer.cancel();
-        //FlutterOverlayWindow.closeOverlay();
+        DateTime currentDate = DateTime.now();
+        String formattedHour = '${currentDate.hour}:${currentDate.minute}';
+        time2 = formattedHour;
+        ShareData.history.add([dt, time1, time2]);
       } else {
+        DateTime currentDate = DateTime.now();
+        String formattedDate =
+            '${currentDate.day}-${currentDate.month}-${currentDate.year}';
+        String formattedHour = '${currentDate.hour}:${currentDate.minute}';
+        dt = formattedDate;
+        time1 = formattedHour;
         startOverlayTimer();
       }
     });
@@ -70,7 +83,7 @@ class _homeState extends State<home> {
       backgroundColor: const Color(0xff020202),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 110),
+          padding: const EdgeInsets.only(top: 80),
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -187,6 +200,33 @@ class _homeState extends State<home> {
                   ),
                   //add image round1
                 ],
+              ),
+              //button with text 'History', onpressed navigate to history, border white 2, color same as background colour
+              Theme(
+                data: Theme.of(context).copyWith(
+                  splashColor: Colors.transparent,
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context, EnterRoute(page: History()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xff020202),
+                    onPrimary: Color(0xffffffff),
+                    side: BorderSide(width: 2.0, color: Color(0xffffffff)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32.0),
+                    ),
+                  ),
+                  child: Text(
+                    'History',
+                    style: TextStyle(
+                        color: Color(0xffffffff),
+                        fontSize: 20,
+                        fontFamily: 'medio'),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ),
             ],
           ),
