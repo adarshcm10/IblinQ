@@ -21,15 +21,6 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
-  late final String jkl;
-
-  bool selbtn1 = false;
-  bool selbtn2 = false;
-  bool selbtn3 = false;
-  bool selbtn4 = true;
-
-  int sel = 1;
-
   late Timer overlayTimer;
   String dt = '';
   String time1 = '';
@@ -100,7 +91,7 @@ class _homeState extends State<home> {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                  bottom: 65,
+                  bottom: 30,
                 ),
                 child: Image.asset(
                   'assets/logo.png',
@@ -111,7 +102,7 @@ class _homeState extends State<home> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: Text(
-                  'Select Icon',
+                  'Icon',
                   style: TextStyle(
                       color: Color(0xffffffff),
                       fontSize: 20,
@@ -120,57 +111,10 @@ class _homeState extends State<home> {
                 ),
               ),
               SizedBox(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SelectableImageButton(
-                        imagePath: 'assets/0.gif',
-                        isSelected: selbtn1,
-                        onPressed: () {
-                          setState(() {
-                            selbtn1 = true;
-                            selbtn2 = false;
-                            selbtn3 = false;
-                            selbtn4 = false;
-                          });
-                        }),
-                    SelectableImageButton(
-                        imagePath: 'assets/1.gif',
-                        isSelected: selbtn2,
-                        onPressed: () {
-                          setState(() {
-                            selbtn1 = false;
-                            selbtn2 = true;
-                            selbtn3 = false;
-                            selbtn4 = false;
-                          });
-                        }),
-                    SelectableImageButton(
-                      imagePath: 'assets/2.gif',
-                      isSelected: selbtn3,
-                      onPressed: () {
-                        setState(() {
-                          selbtn1 = false;
-                          selbtn2 = false;
-                          selbtn3 = true;
-                          selbtn4 = false;
-                        });
-                      },
-                    ),
-                    SelectableImageButton(
-                      imagePath: 'assets/3.gif',
-                      isSelected: selbtn4,
-                      onPressed: () {
-                        setState(() {
-                          selbtn1 = false;
-                          selbtn2 = false;
-                          selbtn3 = false;
-                          selbtn4 = true;
-                        });
-                      },
-                    ),
-                  ],
-                ),
+                child: SelectableImageButton(
+                    imagePath: 'assets/3.gif',
+                    isSelected: true,
+                    onPressed: () {}),
               ),
 
               Padding(
