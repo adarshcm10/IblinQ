@@ -9,3 +9,8 @@
 * Simple and user-friendly interface
 * Session history
 
+
+**How to use code**
+* Run ```git clone https://github.com/adarshcm10/IblinQ.git``` to clone the repositiory.
+* Copy assests, lib and fonts folders to your project.
+* Change header files to your project directory.
