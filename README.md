@@ -1,16 +1,11 @@
-# iblinq
+# iblinQ - Eye Blink Reminder App
 
-A new Flutter project.
+**iblinQ** is a mobile application designed to help users maintain healthy eye habits by reminding them to blink at regular intervals. This can help reduce dry eyes, irritation, and strain caused by excessive screen time.
 
-## Getting Started
+**Features:**
 
-This project is a starting point for a Flutter application.
+* Set a preferred blinking interval
+* Receive timely notifications to blink
+* Simple and user-friendly interface
+* Session history
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
